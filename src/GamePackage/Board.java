@@ -22,7 +22,7 @@ public class Board extends JFrame {
 
         setSize(600,500);
         setVisible(true);
-        setResizable(false);
+        //setResizable(false);
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
