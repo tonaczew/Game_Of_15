@@ -17,4 +17,12 @@ public class Button extends JButton {
     public void setyPosition(int y){
         yPosition = y;
     }
+
+    public int getxPosition() {
+        return xPosition;
+    }
+
+    public int getyPosition() {
+        return yPosition;
+    }
 }
