@@ -15,8 +15,10 @@ public class Board extends JFrame {
     JPanel gamePanel = new JPanel();
     JPanel settingsPanel = new JPanel();
     JButton newGame = new JButton("New Game");
+    Button black = new Button("");
 
     public Board(){
+
         rootPanel.setLayout(new BorderLayout());
         gamePanel.setLayout(new GridLayout(4, 4));
         add(rootPanel);
@@ -26,7 +28,6 @@ public class Board extends JFrame {
         settingsPanel.add(newGame);
 
         List<Button> buttonList = new ArrayList();
-        Button black = new Button("");
         black.setBackground(Color.BLACK);
         black.setEnabled(false);
         buttonList.add(black);
@@ -82,8 +83,8 @@ public class Board extends JFrame {
     }
 
     private boolean check(Button button) {
-        int x = button.getxCoordinate() - black.getxCoordinate();
-        int y = button.getyCoordinate() - black.getyCoordinate();
+        int x = button.getxPosition() - black.getxPosition();
+        int y = button.getyPosition() - black.getyPosition();
         return ((Math.abs(x) == 1 && y == 0) || (x == 0 && Math.abs(y) == 1));
     }
 
