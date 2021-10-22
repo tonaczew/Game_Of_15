@@ -2,6 +2,10 @@ package GamePackage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class Board extends JFrame {
     public static void main(String[] args) {new Board();}
@@ -19,6 +23,41 @@ public class Board extends JFrame {
         rootPanel.add(settingsPanel, BorderLayout.EAST);
         rootPanel.add(gamePanel);
         settingsPanel.add(newGame);
+
+        List<Button> buttonList = new ArrayList();
+        Button black = new Button("");
+        black.setBackground(Color.BLACK);
+        black.setEnabled(false);
+        buttonList.add(black);
+        for (int i = 1; i < 16; i++) {
+            buttonList.add(new Button(String.valueOf(i)));
+        }
+        Collections.shuffle(buttonList);
+        int k = 0;
+        for (int i = 1; i < 5; i++) {
+            for (int j = 1; j < 5; j++) {
+                buttonList.get(k).setxPosition(i);
+                buttonList.get(k).setyPosition(j);
+                gamePanel.add(buttonList.get(k));
+                k++;
+            }
+        }
+        /*int x = 1;
+        int y = 1;
+        for (int buttons = 1; buttons < 13 ; buttons++) {
+            Button button = new Button(String.valueOf(buttons), x,y);
+            button.addActionListener(this);
+            gamePanel.add(button);
+            System.out.printf("Button %d x-position: %d, y-position: %d%n", buttons, button.getxCoordinate(), button.getyCoordinate());
+            x++;
+            if(x == 5){
+                x = 1;
+                y++;
+            }
+
+
+         */
+
 
         setSize(600,500);
         setVisible(true);
