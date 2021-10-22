@@ -12,7 +12,6 @@ public class Board extends JFrame {
     JButton newGame = new JButton("New Game");
 
     public Board(){
-
         rootPanel.setLayout(new BorderLayout());
         gamePanel.setLayout(new GridLayout(4, 4));
         add(rootPanel);
