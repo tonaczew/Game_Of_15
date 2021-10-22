@@ -24,6 +24,5 @@ public class Board extends JFrame {
         setVisible(true);
         //setResizable(false);
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
-        int s = v;
     }
 }
