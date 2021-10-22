@@ -37,7 +37,6 @@ public class Board extends JFrame implements ActionListener {
         }
         shuffleAndPlaceButtons(buttonList);
 
-
          newGame.addActionListener(e -> shuffleAndPlaceButtons(buttonList));
 
         setSize(600,500);
@@ -81,6 +80,4 @@ public class Board extends JFrame implements ActionListener {
             }
         }
     }
-
-
 }
