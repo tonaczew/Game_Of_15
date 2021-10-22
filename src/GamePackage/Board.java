@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -16,7 +15,7 @@ public class Board extends JFrame implements ActionListener {
     JPanel gamePanel = new JPanel();
     JPanel settingsPanel = new JPanel();
     JButton newGame = new JButton("New Game");
-    Button black = new Button("");
+    Button black = new Button("", 0);
 
     public Board(){
 
@@ -33,7 +32,7 @@ public class Board extends JFrame implements ActionListener {
         black.setEnabled(false);
         buttonList.add(black);
         for (int i = 1; i < 16; i++) {
-            buttonList.add(new Button(String.valueOf(i)));
+            buttonList.add(new Button(String.valueOf(i), i));
         }
         shuffleAndPlaceButtons(buttonList);
 
@@ -54,10 +53,32 @@ public class Board extends JFrame implements ActionListener {
             t.setText("");
             t.setBackground(Color.black);
             t.setEnabled(false);
+            int tempIndex = t.getSpecialIndex();
+            t.setSpecialIndex(black.getSpecialIndex());
+            black.setSpecialIndex(tempIndex);
             black.setText(buttonText);
             black.setBackground(this.getBackground());
             black.setEnabled(true);
             black = t;
+
+            for (int i = 1; i < 16; i++) {
+                Button tempButton = (Button) gamePanel.getComponent(i);
+                if(!(tempButton.getSpecialIndex() == i)) {
+                    break;
+                }
+                if(i ==15) {
+                    System.out.println("Win");
+                }
+            }
+            for (int i = 0; i < 15; i++) {
+                Button tempButton = (Button) gamePanel.getComponent(i);
+                if(!(tempButton.getSpecialIndex() == i+1)) {
+                    break;
+                }
+                if(i ==14) {
+                    System.out.println("Win");
+                }
+            }
         }
     }
 
