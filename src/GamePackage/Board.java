@@ -35,17 +35,11 @@ public class Board extends JFrame implements ActionListener {
         for (int i = 1; i < 16; i++) {
             buttonList.add(new Button(String.valueOf(i)));
         }
-        Collections.shuffle(buttonList);
-        int k = 0;
-        for (int i = 1; i < 5; i++) {
-            for (int j = 1; j < 5; j++) {
-                buttonList.get(k).addActionListener(this);
-                buttonList.get(k).setxPosition(i);
-                buttonList.get(k).setyPosition(j);
-                gamePanel.add(buttonList.get(k));
-                k++;
-            }
-        }
+        shuffleAndPlaceButtons(buttonList);
+
+
+         newGame.addActionListener(e -> shuffleAndPlaceButtons(buttonList));
+
         setSize(600,500);
         setVisible(true);
         setResizable(false);
@@ -55,7 +49,7 @@ public class Board extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Button t = (Button) e.getSource();
-        if(e.getSource() == t && check(t)){
+        if (e.getSource() == t && check(t)) {
             String buttonText = t.getText();
             t.setText("");
             t.setBackground(Color.black);
@@ -71,6 +65,21 @@ public class Board extends JFrame implements ActionListener {
         int x = button.getxPosition() - black.getxPosition();
         int y = button.getyPosition() - black.getyPosition();
         return ((Math.abs(x) == 1 && y == 0) || (x == 0 && Math.abs(y) == 1));
+    }
+
+    private void shuffleAndPlaceButtons(List<Button> buttonList){
+        Collections.shuffle(buttonList);
+        int k = 0;
+        for (int i = 1; i < 5; i++) {
+            for (int j = 1; j < 5; j++) {
+                buttonList.get(k).addActionListener(this);
+                buttonList.get(k).setxPosition(i);
+                buttonList.get(k).setyPosition(j);
+                gamePanel.add(buttonList.get(k));
+                k++;
+                gamePanel.revalidate();
+            }
+        }
     }
 
 
