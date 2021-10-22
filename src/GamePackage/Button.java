@@ -4,12 +4,17 @@ import javax.swing.*;
 
 public class Button extends JButton {
 
-    private final int xPosition;
-    private final int yPosition;
+    private int xPosition;
+    private int yPosition;
 
-    public Button(String text, int xPosition, int yPosition) {
+    public Button(String text) {
         super(text);
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
+    }
+
+    public void setxPosition(int x){
+        xPosition = x;
+    }
+    public void setyPosition(int y){
+        yPosition = y;
     }
 }
