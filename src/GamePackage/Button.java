@@ -12,4 +12,12 @@ public class Button extends JButton {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
     }
+
+    public int getxPosition() {
+        return xPosition;
+    }
+
+    public int getyPosition() {
+        return yPosition;
+    }
 }
