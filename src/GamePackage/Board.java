@@ -13,23 +13,17 @@ public class Board extends JFrame implements ActionListener {
     JPanel rootPanel;
     JPanel gamePanel;
     JPanel settingsPanel;
-    JButton newGame;
-    Button black;
+    JButton newGameButton;
+    Button holeOnBoard;
     List<Button> buttonList;
 
     public Board(){
         initializeBoard();
         creatingHoleOnBoard();
-        createShuffledButtons();
-
-
-
-
-
+        createButtons();
         placeShuffledButtonsOnBoard(buttonList);
 
-
-        newGame.addActionListener(e -> placeShuffledButtonsOnBoard(buttonList));
+        newGameButton.addActionListener(e -> placeShuffledButtonsOnBoard(buttonList));
 
         this.add(rootPanel);
         this.setSize(600,500);
@@ -38,9 +32,9 @@ public class Board extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    private void createShuffledButtons() {
+    private void createButtons() {
         buttonList = new ArrayList<>();
-        buttonList.add(black);
+        buttonList.add(holeOnBoard);
         for (int i = 1; i < 16; i++) {
             buttonList.add(new Button(String.valueOf(i), i));
         }
@@ -50,20 +44,20 @@ public class Board extends JFrame implements ActionListener {
         rootPanel = new JPanel();
         gamePanel = new JPanel();
         settingsPanel = new JPanel();
-        newGame = new JButton("New Game");
+        newGameButton = new JButton("New Game");
 
         gamePanel.setLayout(new GridLayout(4, 4));
         rootPanel.setLayout(new BorderLayout());
 
-        settingsPanel.add(newGame);
+        settingsPanel.add(newGameButton);
         rootPanel.add(gamePanel);
         rootPanel.add(settingsPanel, BorderLayout.EAST);
     }
 
     private void creatingHoleOnBoard() {
-        black = new Button("", 0);
-        black.setBackground(Color.BLACK);
-        black.setEnabled(false);
+        holeOnBoard = new Button("", 0);
+        holeOnBoard.setBackground(Color.BLACK);
+        holeOnBoard.setEnabled(false);
     }
 
     @Override
@@ -75,37 +69,41 @@ public class Board extends JFrame implements ActionListener {
             t.setBackground(Color.black);
             t.setEnabled(false);
             int tempIndex = t.getSpecialIndex();
-            t.setSpecialIndex(black.getSpecialIndex());
-            black.setSpecialIndex(tempIndex);
-            black.setText(buttonText);
-            black.setBackground(this.getBackground());
-            black.setEnabled(true);
-            black = t;
+            t.setSpecialIndex(holeOnBoard.getSpecialIndex());
+            holeOnBoard.setSpecialIndex(tempIndex);
+            holeOnBoard.setText(buttonText);
+            holeOnBoard.setBackground(this.getBackground());
+            holeOnBoard.setEnabled(true);
+            holeOnBoard = t;
 
-            for (int i = 1; i < 16; i++) {
-                Button tempButton = (Button) gamePanel.getComponent(i);
-                if(!(tempButton.getSpecialIndex() == i)) {
-                    break;
-                }
-                if(i ==15) {
-                    System.out.println("Win");
-                }
+            checkWin();
+        }
+    }
+
+    private void checkWin() {
+        for (int i = 1; i < 16; i++) {
+            Button tempButton = (Button) gamePanel.getComponent(i);
+            if(!(tempButton.getSpecialIndex() == i)) {
+                break;
             }
-            for (int i = 0; i < 15; i++) {
-                Button tempButton = (Button) gamePanel.getComponent(i);
-                if(!(tempButton.getSpecialIndex() == i+1)) {
-                    break;
-                }
-                if(i ==14) {
-                    System.out.println("Win");
-                }
+            if(i ==15) {
+                System.out.println("Win");
+            }
+        }
+        for (int i = 0; i < 15; i++) {
+            Button tempButton = (Button) gamePanel.getComponent(i);
+            if(!(tempButton.getSpecialIndex() == i+1)) {
+                break;
+            }
+            if(i ==14) {
+                System.out.println("Win");
             }
         }
     }
 
     private boolean check(Button button) {
-        int x = button.getxPosition() - black.getxPosition();
-        int y = button.getyPosition() - black.getyPosition();
+        int x = button.getxPosition() - holeOnBoard.getxPosition();
+        int y = button.getyPosition() - holeOnBoard.getyPosition();
         return ((Math.abs(x) == 1 && y == 0) || (x == 0 && Math.abs(y) == 1));
     }
 
