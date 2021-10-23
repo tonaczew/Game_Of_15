@@ -1,9 +1,11 @@
 package GamePackage;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -17,6 +19,8 @@ public class Board extends JFrame implements ActionListener {
     JButton newGame = new JButton("New Game");
     Button black = new Button("", 0);
 
+    public List<Button> buttonList = new ArrayList();
+
     public Board(){
 
         rootPanel.setLayout(new BorderLayout());
@@ -27,7 +31,6 @@ public class Board extends JFrame implements ActionListener {
         rootPanel.add(gamePanel);
         settingsPanel.add(newGame);
 
-        List<Button> buttonList = new ArrayList();
         black.setBackground(Color.BLACK);
         black.setEnabled(false);
         buttonList.add(black);
@@ -67,7 +70,7 @@ public class Board extends JFrame implements ActionListener {
                     break;
                 }
                 if(i ==15) {
-                    System.out.println("Win");
+                    victoryScreen();
                 }
             }
             for (int i = 0; i < 15; i++) {
@@ -76,7 +79,7 @@ public class Board extends JFrame implements ActionListener {
                     break;
                 }
                 if(i ==14) {
-                    System.out.println("Win");
+                    victoryScreen();
                 }
             }
         }
@@ -89,7 +92,7 @@ public class Board extends JFrame implements ActionListener {
     }
 
     private void shuffleAndPlaceButtons(List<Button> buttonList){
-        Collections.shuffle(buttonList);
+        //Collections.shuffle(buttonList);
         int k = 0;
         for (int i = 1; i < 5; i++) {
             for (int j = 1; j < 5; j++) {
@@ -103,5 +106,21 @@ public class Board extends JFrame implements ActionListener {
         }
     }
 
+    private void victoryScreen(){
+        // Makes it clear that the board is shuffled upon victory! Collections.shuffle(buttonList);
+        shuffleAndPlaceButtons(buttonList);
+        JFrame win = new JFrame();
+        JLabel victory = new JLabel(new ImageIcon("Victory.png"));
+        victory.setOpaque(true);
+        Point p = new Point(getLocation());
+
+        win.setLocation((int)(p.getX() +40),(int)( p.getY() +80));
+        win.add(victory);
+        win.setVisible(true);
+        win.pack();
+
+        win.addFocusListener(victoryListener);
+
+    }
 
 }
