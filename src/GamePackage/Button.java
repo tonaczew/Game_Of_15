@@ -38,5 +38,4 @@ public class Button extends JButton {
     public int getSpecialIndex(){
         return specialIndex;
     }
-
 }
