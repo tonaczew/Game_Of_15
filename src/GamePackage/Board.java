@@ -106,12 +106,10 @@ public class Board extends JFrame implements ActionListener {
         for (int i = 0; i < AMOUNT_OF_BUTTONS-1; i++) {
             Button tempButton = (Button) gamePanel.getComponent(i);
             if(!(tempButton.getSpecialIndex() == i+1)) {
-                break;
-            }
-            if(i ==14) {
-                System.out.println("Win");
+                return;
             }
         }
+        System.out.println("Win");
     }
 
     public static void main(String[] args) {
