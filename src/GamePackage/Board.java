@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 
 public class Board extends JFrame implements ActionListener {
 
+    private final int AMOUNT_OF_BUTTONS = 16;
     JPanel rootPanel;
     JPanel gamePanel;
     JPanel settingsPanel;
@@ -54,14 +55,14 @@ public class Board extends JFrame implements ActionListener {
 
     private void createButtons() {
         buttonList = new ArrayList<>();
-        buttonList.add(holeOnBoard);
-        for (int i = 1; i < 16; i++) {
+        for (int i = 1; i < AMOUNT_OF_BUTTONS; i++) {
             buttonList.add(new Button(String.valueOf(i), i));
         }
+        buttonList.add(holeOnBoard);
     }
 
     private void placeShuffledButtonsOnBoard(List<Button> buttonList){
-        Collections.shuffle(buttonList);
+       // Collections.shuffle(buttonList);
         int k = 0;
         for (int i = 1; i < 5; i++) {
             for (int j = 1; j < 5; j++) {
@@ -102,17 +103,7 @@ public class Board extends JFrame implements ActionListener {
     }
 
     private void checkWin() {
-        for (int i = 1; i < 16; i++) {
-            Button tempButton = (Button) gamePanel.getComponent(i);
-            if(!(tempButton.getSpecialIndex() == i)) {
-                break;
-            }
-            if(i ==15) {
-                System.out.println("Win");
-                return;
-            }
-        }
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < AMOUNT_OF_BUTTONS-1; i++) {
             Button tempButton = (Button) gamePanel.getComponent(i);
             if(!(tempButton.getSpecialIndex() == i+1)) {
                 break;
