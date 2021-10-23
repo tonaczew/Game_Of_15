@@ -1,6 +1,7 @@
 package GamePackage;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Button extends JButton {
 
@@ -11,6 +12,9 @@ public class Button extends JButton {
     public Button(String text, int specialIndex) {
         super(text);
         this.specialIndex = specialIndex;
+        this.setFocusable(false);
+        this.setFont(new Font("Arial", Font.BOLD, 24));
+        this.setBorder(BorderFactory.createEtchedBorder());
     }
 
     public void setxPosition(int x){
@@ -34,5 +38,4 @@ public class Button extends JButton {
     public int getSpecialIndex(){
         return specialIndex;
     }
-
 }
