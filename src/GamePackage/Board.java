@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -80,20 +79,23 @@ public class Board extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Button pressedButton = (Button) e.getSource();
         if(e.getSource() == pressedButton && check(pressedButton)){
-            String buttonText = pressedButton.getText();
-            pressedButton.setText("");
-            pressedButton.setBackground(Color.black);
-            pressedButton.setEnabled(false);
-            int tempIndex = pressedButton.getSpecialIndex();
-            pressedButton.setSpecialIndex(holeOnBoard.getSpecialIndex());
-            holeOnBoard.setSpecialIndex(tempIndex);
-            holeOnBoard.setText(buttonText);
-            holeOnBoard.setBackground(this.getBackground());
-            holeOnBoard.setEnabled(true);
-            holeOnBoard = pressedButton;
-
+            swapButtons(pressedButton);
             checkWin();
         }
+    }
+
+    private void swapButtons(Button pressedButton) {
+        String buttonText = pressedButton.getText();
+        pressedButton.setText("");
+        pressedButton.setBackground(Color.black);
+        pressedButton.setEnabled(false);
+        int tempIndex = pressedButton.getSpecialIndex();
+        pressedButton.setSpecialIndex(holeOnBoard.getSpecialIndex());
+        holeOnBoard.setSpecialIndex(tempIndex);
+        holeOnBoard.setText(buttonText);
+        holeOnBoard.setBackground(this.getBackground());
+        holeOnBoard.setEnabled(true);
+        holeOnBoard = pressedButton;
     }
 
     private boolean check(Button button) {
