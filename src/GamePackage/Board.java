@@ -19,16 +19,8 @@ public class Board extends JFrame implements ActionListener {
     public Board(){
         initializeBoard();
 
-        rootPanel.setLayout(new BorderLayout());
-        gamePanel.setLayout(new GridLayout(4, 4));
-
-        rootPanel.add(settingsPanel, BorderLayout.EAST);
-        rootPanel.add(gamePanel);
-        settingsPanel.add(newGame);
-
         List<Button> buttonList = new ArrayList();
-        black.setBackground(Color.BLACK);
-        black.setEnabled(false);
+
         buttonList.add(black);
         for (int i = 1; i < 16; i++) {
             buttonList.add(new Button(String.valueOf(i), i));
@@ -50,7 +42,21 @@ public class Board extends JFrame implements ActionListener {
         gamePanel = new JPanel();
         settingsPanel = new JPanel();
         newGame = new JButton("New Game");
+
+        gamePanel.setLayout(new GridLayout(4, 4));
+        rootPanel.setLayout(new BorderLayout());
+
+        settingsPanel.add(newGame);
+        rootPanel.add(gamePanel);
+        rootPanel.add(settingsPanel, BorderLayout.EAST);
+
+        creatingHoleOnBoard();
+    }
+
+    private void creatingHoleOnBoard() {
         black = new Button("", 0);
+        black.setBackground(Color.BLACK);
+        black.setEnabled(false);
     }
 
     @Override
@@ -114,6 +120,4 @@ public class Board extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new Board();
     }
-
-
 }
