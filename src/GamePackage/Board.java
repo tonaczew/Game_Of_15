@@ -49,7 +49,7 @@ public class Board extends JFrame implements ActionListener {
 
     private void creatingHoleOnBoard() {
         holeOnBoard = new Button("", 0);
-        holeOnBoard.setBackground(Color.BLACK);
+        holeOnBoard.setBackground(UIManager.getColor ( "Panel.background" ));
         holeOnBoard.setEnabled(false);
     }
 
@@ -88,7 +88,7 @@ public class Board extends JFrame implements ActionListener {
     private void swapButtons(Button pressedButton) {
         String buttonText = pressedButton.getText();
         pressedButton.setText("");
-        pressedButton.setBackground(Color.black);
+        pressedButton.setBackground(UIManager.getColor ( "Panel.background" ));
         pressedButton.setEnabled(false);
         int tempIndex = pressedButton.getSpecialIndex();
         pressedButton.setSpecialIndex(holeOnBoard.getSpecialIndex());
