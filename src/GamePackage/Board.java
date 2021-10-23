@@ -117,7 +117,7 @@ public class Board extends JFrame implements ActionListener {
     }
 
     private void victoryScreen(){
-        placeShuffledButtonsOnBoard(buttonList); // creates a new board in the background
+        placeShuffledButtonsOnBoard(buttonList);
         JLabel victory = new JLabel(new ImageIcon("Victory.png"));
         win.setLocation((getX() +40),(getY() +80)); //getX & getY is the Games JFrame's Positions
         win.add(victory);
