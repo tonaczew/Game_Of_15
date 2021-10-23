@@ -9,19 +9,18 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class Board extends JFrame implements ActionListener {
-    public static void main(String[] args) {new Board();}
 
-    JPanel rootPanel = new JPanel();
-    JPanel gamePanel = new JPanel();
-    JPanel settingsPanel = new JPanel();
-    JButton newGame = new JButton("New Game");
-    Button black = new Button("", 0);
+    JPanel rootPanel;
+    JPanel gamePanel;
+    JPanel settingsPanel;
+    JButton newGame;
+    Button black;
 
     public Board(){
+        initializeBoard();
 
         rootPanel.setLayout(new BorderLayout());
         gamePanel.setLayout(new GridLayout(4, 4));
-        add(rootPanel);
 
         rootPanel.add(settingsPanel, BorderLayout.EAST);
         rootPanel.add(gamePanel);
@@ -37,18 +36,27 @@ public class Board extends JFrame implements ActionListener {
         shuffleAndPlaceButtons(buttonList);
 
 
-         newGame.addActionListener(e -> shuffleAndPlaceButtons(buttonList));
+        newGame.addActionListener(e -> shuffleAndPlaceButtons(buttonList));
 
-        setSize(600,500);
-        setVisible(true);
-        setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.add(rootPanel);
+        this.setSize(600,500);
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    private void initializeBoard() {
+        rootPanel = new JPanel();
+        gamePanel = new JPanel();
+        settingsPanel = new JPanel();
+        newGame = new JButton("New Game");
+        black = new Button("", 0);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Button t = (Button) e.getSource();
-        if (e.getSource() == t && check(t)) {
+        if(e.getSource() == t && check(t)){
             String buttonText = t.getText();
             t.setText("");
             t.setBackground(Color.black);
@@ -101,6 +109,10 @@ public class Board extends JFrame implements ActionListener {
                 gamePanel.revalidate();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Board();
     }
 
 
