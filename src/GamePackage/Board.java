@@ -3,16 +3,16 @@ package GamePackage;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class Board extends JFrame implements ActionListener {
     public static void main(String[] args) {new Board();}
 
+    JFrame win = new JFrame();
     JPanel rootPanel = new JPanel();
     JPanel gamePanel = new JPanel();
     JPanel settingsPanel = new JPanel();
@@ -107,20 +107,30 @@ public class Board extends JFrame implements ActionListener {
     }
 
     private void victoryScreen(){
-        // Makes it clear that the board is shuffled upon victory! Collections.shuffle(buttonList);
-        shuffleAndPlaceButtons(buttonList);
-        JFrame win = new JFrame();
+        shuffleAndPlaceButtons(buttonList); // creates a new board in the background
         JLabel victory = new JLabel(new ImageIcon("Victory.png"));
-        victory.setOpaque(true);
-        Point p = new Point(getLocation());
 
-        win.setLocation((int)(p.getX() +40),(int)( p.getY() +80));
+        win.setLocation((getX() +40),(getY() +80)); //getX & getY is the Games JFrame's Positions
         win.add(victory);
         win.setVisible(true);
         win.pack();
+        win.setResizable(false);
 
         win.addFocusListener(victoryListener);
-
+        win.addMouseListener(victoryClick);
     }
-
+    FocusListener victoryListener = new FocusAdapter() {
+        @Override
+        public void focusLost(FocusEvent e) {
+            super.focusLost(e);
+            win.setVisible(false);
+        }
+    };
+    MouseListener victoryClick = new MouseAdapter(){
+        @Override
+        public void mouseClicked(MouseEvent e){
+            super.mouseClicked(e);
+            win.setVisible(false);
+        }
+    };
 }
