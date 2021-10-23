@@ -1,16 +1,18 @@
 package GamePackage;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class Board extends JFrame implements ActionListener {
 
     private final int AMOUNT_OF_BUTTONS = 16;
+    JFrame win = new JFrame();
     JPanel rootPanel;
     JPanel gamePanel;
     JPanel settingsPanel;
@@ -99,6 +101,7 @@ public class Board extends JFrame implements ActionListener {
         holeOnBoard = pressedButton;
     }
 
+
     private boolean check(Button button) {
         int x = button.getxPosition() - holeOnBoard.getxPosition();
         int y = button.getyPosition() - holeOnBoard.getyPosition();
@@ -112,8 +115,35 @@ public class Board extends JFrame implements ActionListener {
                 return;
             }
         }
-        System.out.println("Win");
+        victoryScreen();
     }
+
+    private void victoryScreen(){
+        placeShuffledButtonsOnBoard(buttonList); // creates a new board in the background
+        JLabel victory = new JLabel(new ImageIcon("Victory.png"));
+        win.setLocation((getX() +40),(getY() +80)); //getX & getY is the Games JFrame's Positions
+        win.add(victory);
+        win.setVisible(true);
+        win.pack();
+        win.setResizable(false);
+
+        win.addFocusListener(victoryListener);
+        win.addMouseListener(victoryClick);
+    }
+    FocusListener victoryListener = new FocusAdapter() {
+        @Override
+        public void focusLost(FocusEvent e) {
+            super.focusLost(e);
+            win.setVisible(false);
+        }
+    };
+    MouseListener victoryClick = new MouseAdapter(){
+        @Override
+        public void mouseClicked(MouseEvent e){
+            super.mouseClicked(e);
+            win.setVisible(false);
+        }
+    };
 
     public static void main(String[] args) {
         new Board();
