@@ -26,10 +26,10 @@ public class Board extends JFrame implements ActionListener {
 
 
 
-        shuffleAndPlaceButtons(buttonList);
+        placeShuffledButtonsOnBoard(buttonList);
 
 
-        newGame.addActionListener(e -> shuffleAndPlaceButtons(buttonList));
+        newGame.addActionListener(e -> placeShuffledButtonsOnBoard(buttonList));
 
         this.add(rootPanel);
         this.setSize(600,500);
@@ -109,7 +109,7 @@ public class Board extends JFrame implements ActionListener {
         return ((Math.abs(x) == 1 && y == 0) || (x == 0 && Math.abs(y) == 1));
     }
 
-    private void shuffleAndPlaceButtons(List<Button> buttonList){
+    private void placeShuffledButtonsOnBoard(List<Button> buttonList){
         Collections.shuffle(buttonList);
         int k = 0;
         for (int i = 1; i < 5; i++) {
