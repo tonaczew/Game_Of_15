@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -61,7 +62,7 @@ public class Board extends JFrame implements ActionListener {
     }
 
     private void placeShuffledButtonsOnBoard(List<Button> buttonList){
-       // Collections.shuffle(buttonList);
+        Collections.shuffle(buttonList);
         int k = 0;
         for (int i = 1; i < 5; i++) {
             for (int j = 1; j < 5; j++) {
