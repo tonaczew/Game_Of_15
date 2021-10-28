@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class Button extends JButton {
 
+
     private int xPosition;
     private int yPosition;
     private int specialIndex;
