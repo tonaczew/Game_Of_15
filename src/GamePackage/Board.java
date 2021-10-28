@@ -18,19 +18,13 @@ public class Board extends JFrame implements ActionListener {
     Button holeOnBoard;
     List<Button> buttonList;
 
-    public Board(){
+    public Board(boolean demo){
         initializeBoard();
         creatingHoleOnBoard();
         createButtons();
-        placeShuffledButtonsOnBoard(buttonList);
+        placeShuffledButtonsOnBoard(buttonList, demo);
 
-        newGameButton.addActionListener(e -> placeShuffledButtonsOnBoard(buttonList));
-
-        this.add(rootPanel);
-        this.setSize(600,500);
-        this.setVisible(true);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        newGameButton.addActionListener(e -> placeShuffledButtonsOnBoard(buttonList, false));
     }
 
     private void initializeBoard() {
@@ -38,6 +32,7 @@ public class Board extends JFrame implements ActionListener {
         gamePanel = new JPanel();
         settingsPanel = new JPanel();
         newGameButton = new JButton("New Game");
+        newGameButton.setFocusable(false);
 
         gamePanel.setLayout(new GridLayout(4, 4));
         rootPanel.setLayout(new BorderLayout());
@@ -45,10 +40,17 @@ public class Board extends JFrame implements ActionListener {
         settingsPanel.add(newGameButton);
         rootPanel.add(gamePanel);
         rootPanel.add(settingsPanel, BorderLayout.EAST);
+
+        this.add(rootPanel);
+        this.setSize(600,500);
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void creatingHoleOnBoard() {
-        holeOnBoard = new Button("", 0);
+        holeOnBoard = new Button("");
         holeOnBoard.setBackground(UIManager.getColor ( "Panel.background" ));
         holeOnBoard.setEnabled(false);
     }
@@ -56,20 +58,22 @@ public class Board extends JFrame implements ActionListener {
     private void createButtons() {
         buttonList = new ArrayList<>();
         for (int i = 1; i < AMOUNT_OF_BUTTONS; i++) {
-            buttonList.add(new Button(String.valueOf(i), i));
+            buttonList.add(new Button(String.valueOf(i)));
         }
         buttonList.add(holeOnBoard);
     }
 
-    private void placeShuffledButtonsOnBoard(List<Button> buttonList){
-        Collections.shuffle(buttonList);
+    private void placeShuffledButtonsOnBoard(List<Button> buttonList, boolean demo){
+        if(!demo) {
+            Collections.shuffle(buttonList);
+        }
         int k = 0;
         for (int i = 1; i < 5; i++) {
             for (int j = 1; j < 5; j++) {
-                buttonList.get(k).addActionListener(this);
-                buttonList.get(k).setxPosition(i);
-                buttonList.get(k).setyPosition(j);
-                gamePanel.add(buttonList.get(k));
+                Button current = buttonList.get(k);
+                current.addActionListener(this);
+                current.setPosition(i, j);
+                gamePanel.add(current);
                 k++;
                 gamePanel.revalidate();
             }
@@ -117,7 +121,6 @@ public class Board extends JFrame implements ActionListener {
     }
 
     private void victoryScreen(){
-        placeShuffledButtonsOnBoard(buttonList);
         JLabel victory = new JLabel(new ImageIcon("Victory.png"));
         win.setLocation((getX() +40),(getY() +80));
         win.add(victory);
@@ -143,7 +146,4 @@ public class Board extends JFrame implements ActionListener {
         }
     };
 
-    public static void main(String[] args) {
-        new Board();
-    }
 }

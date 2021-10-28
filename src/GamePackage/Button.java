@@ -1,28 +1,30 @@
 package GamePackage;
 
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Button extends JButton {
 
+    private static int numberOfButtons = 0;
     private int xPosition;
     private int yPosition;
     private int specialIndex;
 
-    public Button(String text, int specialIndex) {
+    public Button(String text) {
         super(text);
-        this.specialIndex = specialIndex;
+        this.specialIndex = numberOfButtons;
         this.setFocusable(false);
         this.setFont(new Font("Arial", Font.BOLD, 24));
         this.setBorder(BorderFactory.createEtchedBorder());
+        numberOfButtons++;
     }
 
-    public void setxPosition(int x){
+    public void setPosition(int x, int y){
         xPosition = x;
-    }
-    public void setyPosition(int y){
         yPosition = y;
     }
+
     public void setSpecialIndex(int i) {
         specialIndex = i;
     }
@@ -34,6 +36,7 @@ public class Button extends JButton {
     public int getyPosition() {
         return yPosition;
     }
+
 
     public int getSpecialIndex(){
         return specialIndex;
