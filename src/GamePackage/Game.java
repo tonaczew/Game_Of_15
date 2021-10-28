@@ -30,6 +30,7 @@ public class Game extends JFrame implements ActionListener {
     private void initializeGame() {
         start  = new JButton("start new game");
         demo = new JButton("Demo win");
+        demo.setBackground(Color.LIGHT_GRAY);
         menu = new JPanel();
 
         menu.setLayout(new FlowLayout());
