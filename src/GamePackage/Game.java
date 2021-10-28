@@ -18,16 +18,16 @@ public class Game extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == start){
-            this.setVisible(false);
             new Board(false);
         } else if(e.getSource() == demo){
             new Board(true);
         }
+        this.setVisible(false);
     }
 
     private void initializeGame() {
-        start  = new JButton("start new game");
-        demo = new JButton("Demo win");
+        start  = new JButton("Start New Game");
+        demo = new JButton("Simulate Win");
         menu = new JPanel();
         JPanel root = new JPanel();
         JPanel header = new JPanel();
