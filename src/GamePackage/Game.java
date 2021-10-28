@@ -13,8 +13,6 @@ public class Game extends JFrame implements ActionListener {
 
     public Game(){
         initializeGame();
-        demo.addActionListener(this);
-        start.addActionListener(this);
     }
 
     @Override
@@ -30,12 +28,15 @@ public class Game extends JFrame implements ActionListener {
     private void initializeGame() {
         start  = new JButton("start new game");
         demo = new JButton("Demo win");
-        demo.setBackground(Color.LIGHT_GRAY);
         menu = new JPanel();
+        demo.setBackground(Color.LIGHT_GRAY);
 
         menu.setLayout(new FlowLayout());
         menu.add(start);
         menu.add(demo);
+
+        demo.addActionListener(this);
+        start.addActionListener(this);
 
         this.setSize(new Dimension(300,300));
         this.setLayout(new GridLayout(1,2));
