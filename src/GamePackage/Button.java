@@ -35,6 +35,7 @@ public class Button extends JButton {
         return yPosition;
     }
 
+
     public int getSpecialIndex(){
         return specialIndex;
     }
