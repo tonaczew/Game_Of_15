@@ -50,7 +50,7 @@ public class Board extends JFrame implements ActionListener {
     }
 
     private void creatingHoleOnBoard() {
-        holeOnBoard = new Button("", 0);
+        holeOnBoard = new Button("");
         holeOnBoard.setBackground(UIManager.getColor ( "Panel.background" ));
         holeOnBoard.setEnabled(false);
     }
@@ -58,7 +58,7 @@ public class Board extends JFrame implements ActionListener {
     private void createButtons() {
         buttonList = new ArrayList<>();
         for (int i = 1; i < AMOUNT_OF_BUTTONS; i++) {
-            buttonList.add(new Button(String.valueOf(i), i));
+            buttonList.add(new Button(String.valueOf(i)));
         }
         buttonList.add(holeOnBoard);
     }
@@ -70,10 +70,10 @@ public class Board extends JFrame implements ActionListener {
         int k = 0;
         for (int i = 1; i < 5; i++) {
             for (int j = 1; j < 5; j++) {
-                buttonList.get(k).addActionListener(this);
-                buttonList.get(k).setxPosition(i);
-                buttonList.get(k).setyPosition(j);
-                gamePanel.add(buttonList.get(k));
+                Button current = buttonList.get(k);
+                current.addActionListener(this);
+                current.setPosition(i, j);
+                gamePanel.add(current);
                 k++;
                 gamePanel.revalidate();
             }
