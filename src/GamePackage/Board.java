@@ -30,6 +30,7 @@ public class Board extends JFrame implements ActionListener {
         this.setSize(600,500);
         this.setVisible(true);
         this.setResizable(false);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
