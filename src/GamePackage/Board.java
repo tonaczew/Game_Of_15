@@ -25,13 +25,6 @@ public class Board extends JFrame implements ActionListener {
         placeShuffledButtonsOnBoard(buttonList, demo);
 
         newGameButton.addActionListener(e -> placeShuffledButtonsOnBoard(buttonList, false));
-
-        this.add(rootPanel);
-        this.setSize(600,500);
-        this.setVisible(true);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void initializeBoard() {
@@ -39,6 +32,7 @@ public class Board extends JFrame implements ActionListener {
         gamePanel = new JPanel();
         settingsPanel = new JPanel();
         newGameButton = new JButton("New Game");
+        newGameButton.setFocusable(false);
 
         gamePanel.setLayout(new GridLayout(4, 4));
         rootPanel.setLayout(new BorderLayout());
@@ -46,6 +40,13 @@ public class Board extends JFrame implements ActionListener {
         settingsPanel.add(newGameButton);
         rootPanel.add(gamePanel);
         rootPanel.add(settingsPanel, BorderLayout.EAST);
+
+        this.add(rootPanel);
+        this.setSize(600,500);
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void creatingHoleOnBoard() {
