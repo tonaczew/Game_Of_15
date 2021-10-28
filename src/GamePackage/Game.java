@@ -28,6 +28,8 @@ public class Game extends JFrame implements ActionListener {
     private void initializeGame() {
         start  = new JButton("Start New Game");
         demo = new JButton("Simulate Win");
+        start.setFocusable(false);
+        demo.setFocusable(false);
         menu = new JPanel();
         JPanel root = new JPanel();
         JPanel header = new JPanel();
