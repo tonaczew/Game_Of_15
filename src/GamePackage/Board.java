@@ -143,7 +143,4 @@ public class Board extends JFrame implements ActionListener {
         }
     };
 
-    public static void main(String[] args) {
-        new Board();
-    }
 }
