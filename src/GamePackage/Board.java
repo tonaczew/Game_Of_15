@@ -18,13 +18,13 @@ public class Board extends JFrame implements ActionListener {
     Button holeOnBoard;
     List<Button> buttonList;
 
-    public Board(){
+    public Board(boolean demo){
         initializeBoard();
         creatingHoleOnBoard();
         createButtons();
-        placeShuffledButtonsOnBoard(buttonList);
+        placeShuffledButtonsOnBoard(buttonList, demo);
 
-        newGameButton.addActionListener(e -> placeShuffledButtonsOnBoard(buttonList));
+        newGameButton.addActionListener(e -> placeShuffledButtonsOnBoard(buttonList, false));
 
         this.add(rootPanel);
         this.setSize(600,500);
@@ -61,8 +61,10 @@ public class Board extends JFrame implements ActionListener {
         buttonList.add(holeOnBoard);
     }
 
-    private void placeShuffledButtonsOnBoard(List<Button> buttonList){
-        Collections.shuffle(buttonList);
+    private void placeShuffledButtonsOnBoard(List<Button> buttonList, boolean demo){
+        if(!demo) {
+            Collections.shuffle(buttonList);
+        }
         int k = 0;
         for (int i = 1; i < 5; i++) {
             for (int j = 1; j < 5; j++) {
@@ -117,7 +119,6 @@ public class Board extends JFrame implements ActionListener {
     }
 
     private void victoryScreen(){
-        placeShuffledButtonsOnBoard(buttonList);
         JLabel victory = new JLabel(new ImageIcon("Victory.png"));
         win.setLocation((getX() +40),(getY() +80));
         win.add(victory);
@@ -143,7 +144,4 @@ public class Board extends JFrame implements ActionListener {
         }
     };
 
-    public static void main(String[] args) {
-        new Board();
-    }
 }
